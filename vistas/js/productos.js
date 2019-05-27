@@ -55,7 +55,7 @@ CAPTURANDO LA CATEGORIA PARA ASIGNAR CÓDIGO
 $("#nuevaCategoria").change(function(){
 
 	var idCategoria = $(this).val();
-
+	
 	var datos = new FormData();
   	datos.append("idCategoria", idCategoria);
 
@@ -87,6 +87,83 @@ $("#nuevaCategoria").change(function(){
   	})
 
 })
+
+
+function valores(){
+	momentoActual = new Date() 
+	hora = momentoActual.getHours() 
+	minuto = momentoActual.getMinutes() 
+	segundo = momentoActual.getSeconds() 
+		
+	var horaFinal = minuto + 1
+
+	localStorage.setItem('horaF', horaFinal);
+	cocinado();
+}
+
+
+function cocinado() {
+
+        
+
+		/* horaActual = hora + " : " + minuto + " : " + segundo  */
+		/* horaFinal = hora + " : " + minuto + 2 + " : " + segundo  */
+		momentoActual = new Date() 	
+		var minuto = momentoActual.getMinutes() 
+		console.log(minuto);
+		var TiempoF = localStorage.getItem('horaF');
+		console.log(Number(TiempoF));
+		if(minuto >= Number(TiempoF)  ){
+			localStorage.removeItem('horaF')
+			$.ajax({
+				type: "POST",
+				url: 'ajax/tiempo.ajax.php',
+				data: {data:true},
+				dataType: "json",
+				success:function(){
+
+					alert('Producto Listo para la venta!')
+						  
+				}
+			  });
+		}else{
+			console.log('no es igual');
+			console.log(minuto);
+			setInterval(cocinado, 30000);
+		}
+ 
+        //La función se tendrá que llamar así misma para que sea dinámica, 
+        //de esta forma:
+
+		//setTimeout(mueveReloj,1000)
+		
+	/*   */
+}
+
+$( document ).ready(function() {
+	var TiempoF = localStorage.getItem('horaF');
+	if(TiempoF){
+		valores()
+	}	
+});
+
+
+/*=============================================
+Tiempo de coccion POIOS 7200000
+=============================================*/
+$("#modalAgregarProducto").on("click", "button.enviar",function(){
+
+	var idCategoria = $('#nuevaCategoria').val();
+	console.log(idCategoria); 	
+	
+	if(Number(idCategoria) == 11){
+		valores()
+	}
+
+/*   */
+
+})
+
 
 /*=============================================
 AGREGANDO PRECIO DE VENTA
