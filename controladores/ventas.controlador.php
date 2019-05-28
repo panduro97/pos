@@ -83,6 +83,13 @@ class ControladorVentas{
 
 				$item1b = "stock";
 				$valor1b = $value["stock"];
+/* 
+				var_dump($tablaProductos."<br>");
+				var_dump($item1b."<br>");
+				var_dump($valor1b."<br>");
+				var_dump($valor."<br>"); */
+
+				
 
 				$nuevoStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1b, $valor1b, $valor);
 
@@ -129,7 +136,7 @@ class ControladorVentas{
 
 			if($respuesta == "ok"){
 
-				$impresora = "RPT-008";
+	/* 			$impresora = "RPT-008";
 
 				$conector = new WindowsPrintConnector($impresora);
 
@@ -197,7 +204,7 @@ class ControladorVentas{
 
 				$imprimir->cut();
 
-				$imprimir->close();
+				$imprimir->close(); */
 
 				
 /* 				try{
