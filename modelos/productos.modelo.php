@@ -127,6 +127,29 @@ class ModeloProductos{
 	=============================================*/
 
 	static public function mdlActualizarProducto($tabla, $item1, $valor1, $valor){
+		if($tabla == 'ventas'){
+
+	
+			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
+   
+		   $stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+		   $stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
+   
+		   if($stmt -> execute()){
+   
+			   return "ok";
+		   
+		   }else{
+   
+			   return "error";	
+   
+		   }
+   
+		   $stmt -> close();
+   
+		   $stmt = null;
+	   }
+
 		echo('esto es del modelo'.'<br>');
 /* 		var_dump($tabla.'<br>');
 		var_dump($item1.'<br>'); */
@@ -138,7 +161,7 @@ class ModeloProductos{
 		switch ($valor) {
 			case '27':
 			$stmt = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
-			$stmt2 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = 40");
+			$stmt2 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = 40"); 
 /* 			$stmt3 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
 			$stmt4 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
 			$stmt5 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
@@ -149,13 +172,13 @@ class ModeloProductos{
 			$stmt10 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
 			$stmt11 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id"); */
 
-			$valor1 = $valor1 - 0.5;
+			$valor1 = $valor1 + 0.5;
 			$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
 			$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
 
-			$stmt2 -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-
-			if($stmt -> execute() && $stmt2 -> execute()){
+		 	$stmt2 -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+ 
+			if($stmt -> execute() && $stmt2 -> execute() ){
 	
 				return "ok";
 			
@@ -169,31 +192,47 @@ class ModeloProductos{
 	
 			$stmt = null;
 				break;
-			
+
+				case '40':
+				$stmt = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt2 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = 27"); 
+	/* 			$stmt3 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt4 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt5 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt6 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt7 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt8 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt9 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt10 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
+				$stmt11 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id"); */
+	
+				/* $valor1 = $valor1 + 0.5; */
+				$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+				$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
+	
+				 $stmt2 -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+	 
+				if($stmt -> execute() && $stmt2 -> execute() ){
+		
+					return "ok";
+				
+				}else{
+		
+					return "error";	
+		
+				}
+		
+				$stmt -> close();
+		
+				$stmt = null;
+				break;	
+
 			default:
 				break;
 		}
 	}
 	
-		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
 
-		$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-		$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
-
-		if($stmt -> execute()){
-
-			return "ok";
-		
-		}else{
-
-			return "error";	
-
-		}
-
-		$stmt -> close();
-
-		$stmt = null;
-		
 
 	}
 
