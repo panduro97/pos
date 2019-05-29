@@ -104,7 +104,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
           	if(stock == 0){
 
       			swal({
-			      title: "No hay stock disponible",
+			      title: "No hay stock disponible"+idProducto,
 			      type: "error",
 			      confirmButtonText: "¡Cerrar!"
 			    });
@@ -113,7 +113,44 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 			    return;
 
-          	}
+						}
+
+
+					
+
+					
+						switch (idProducto) {
+							case '40':
+								alert(stock)
+								var stocks =	Number(stock-0.5)		
+								alert('entro aqui 40')
+
+								alert(stocks)
+			
+								break;
+				
+							default:
+									var stocks =	 Number(stock-1);	
+									alert('entro aqui default')
+				
+									alert(stocks)
+								break;
+							} 
+						
+
+						
+						//'+Number(stock-1)+'
+
+						/* 	var idCategoria = $('#nuevaCategoria').val();
+   						$("#numberventas").attr("nuevoStock","Phone");
+
+							console.log(idCategoria); 	
+							
+							if(Number(idCategoria) == 11){
+								valores()
+							} */
+						
+					
 
           	$(".nuevoProducto").append(
 
@@ -137,7 +174,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	          '<div class="col-xs-3">'+
 	            
-	             '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>'+
+	             '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stocks)+'" required>'+
 
 	          '</div>' +
 
@@ -155,7 +192,11 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 	             
 	          '</div>'+
 
-	        '</div>') 
+					'</div>') 
+					
+					var nombreProductos = $('nuevoStock').val(); 
+				
+				console.log(nombreProductos)
 
 	        // SUMAR TOTAL DE PRECIOS
 
@@ -704,8 +745,8 @@ function listarProductos(){
 							  "cantidad" : $(cantidad[i]).val(),
 							  "stock" : $(cantidad[i]).attr("nuevoStock"),
 							  "precio" : $(precio[i]).attr("precioReal"),
-							  "total" : $(precio[i]).val()})
-
+								"total" : $(precio[i]).val()})
+								
 	}
 
 	$("#listaProductos").val(JSON.stringify(listaProductos)); 
@@ -725,7 +766,7 @@ function listarMetodos(){
 		$("#listaMetodoPago").val("Efectivo");
 
 	}else{
-
+		
 		$("#listaMetodoPago").val($("#nuevoMetodoPago").val()+"-"+$("#nuevoCodigoTransaccion").val());
 
 	}
