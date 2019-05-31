@@ -23,7 +23,7 @@ $consulta3 = "SELECT * from productos WHERE descripcion = 'Cocido'";
    echo "Si entro";
    $datos = $conn->query($consulta3);
    $rows = mysqli_fetch_array($datos);
-  $row3 = $rows['stock'];
+   $row3 = $rows['stock'];
   
   $resultado = $row2 + $row3;
 

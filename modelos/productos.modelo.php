@@ -151,11 +151,11 @@ class ModeloProductos{
 	   }
 
 		echo('esto es del modelo'.'<br>');
-/* 		var_dump($tabla.'<br>');
-		var_dump($item1.'<br>'); */
+/* 		var_dump($tabla.'<br>');*/
+/* 		var_dump($item1.'<br>'); 
 		echo $valor1.'<br>';
 		echo $valor.'<br>';
-		echo('esto aun es del modelo'.'<br>');
+		echo('esto aun es del modelo'.'<br>'); */
 
 		if($tabla == 'productos'){
 		switch ($valor) {
@@ -205,8 +205,11 @@ class ModeloProductos{
 				$stmt9 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
 				$stmt10 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
 				$stmt11 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id"); */
-	
-				/* $valor1 = $valor1 + 0.5; */
+
+			
+				$valor1 = $valor1 + 0.5; 
+				echo $valor1;
+				echo 'esto es valor1';
 				$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
 				$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
 	
