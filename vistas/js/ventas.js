@@ -128,7 +128,14 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 								alert(stocks)
 			
 								break;
+							/* case '27':
+									alert(stock)
+									var stocks =	Number(stock-1)		
+									alert('entro aqui 27')
+	
+									alert(stocks)
 				
+									break; */
 							default:
 									var stocks =	 Number(stock-1);	
 									alert('entro aqui default')

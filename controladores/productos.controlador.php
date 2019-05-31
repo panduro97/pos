@@ -106,6 +106,8 @@ class ControladorProductos{
 							   "precio_venta" => $_POST["nuevoPrecioVenta"],
 							   "imagen" => $ruta);
 
+				
+
 				$respuesta = ModeloProductos::mdlIngresarProducto($tabla, $datos);
 
 				if($respuesta == "ok"){
