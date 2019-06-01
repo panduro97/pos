@@ -12,7 +12,7 @@ class ModeloProductos{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN stock ON $tabla.codigo=stock.codigos WHERE $item = :$item ORDER BY $tabla.id DESC");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN stock ON $tabla.conexion=stock.relacion WHERE $item = :$item ORDER BY $tabla.id DESC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -22,7 +22,7 @@ class ModeloProductos{
 
 		}else{
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN stock ON $tabla.codigo=stock.codigos ORDER BY $tabla.id DESC");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN stock ON $tabla.conexion=stock.relacion ORDER BY $tabla.id DESC");
 
 			$stmt -> execute();
 
@@ -138,25 +138,46 @@ class ModeloProductos{
 			echo $valor1.'<br>';
 			echo $valor.'<br>';
 			echo('esto aun es del modelo'.'<br>');
-	
-			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
+			
+			if($item1 == "ventas"){
+				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
    
-		   $stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-		   $stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
-   
-		   if($stmt -> execute()){
-   
-			   return "ok";
-		   
-		   }else{
-   
-			   return "error";	
-   
-		   }
-   
-		   $stmt -> close();
-   
-		   $stmt = null;
+				$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+				$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
+		
+				if($stmt -> execute()){
+		
+					return "ok";
+				
+				}else{
+		
+					return "error";	
+		
+				}
+		
+				$stmt -> close();
+		
+				$stmt = null;
+			}else{
+				$stmt = Conexion::conectar()->prepare("UPDATE stock inner join productos  on stock.relacion = productos.conexion SET $item1 = :$item1 WHERE productos.id = :id");
+				$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+				$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
+		
+				if($stmt -> execute()){
+		
+					return "ok";
+				
+				}else{
+		
+					return "error";	
+		
+				}
+		
+				$stmt -> close();
+		
+				$stmt = null;	
+			}
+
 	   /* } */
 
 
