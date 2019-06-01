@@ -12,7 +12,7 @@ class ModeloProductos{
 
 		if($item != null){
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla WHERE $item = :$item JOIN stock ON productos.codigo=stock.codigo");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN stock ON $tabla.codigo=stock.codigos WHERE $item = :$item ORDER BY $tabla.id DESC");
 
 			$stmt -> bindParam(":".$item, $valor, PDO::PARAM_STR);
 
@@ -22,7 +22,7 @@ class ModeloProductos{
 
 		}else{
 
-			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN stock ON productos.codigo=stock.codigo ");
+			$stmt = Conexion::conectar()->prepare("SELECT * FROM $tabla JOIN stock ON $tabla.codigo=stock.codigos ORDER BY $tabla.id DESC");
 
 			$stmt -> execute();
 
@@ -132,8 +132,12 @@ class ModeloProductos{
 	=============================================*/
 
 	static public function mdlActualizarProducto($tabla, $item1, $valor1, $valor){
-		if($tabla == 'ventas'){
-
+		/* if($tabla == 'ventas'){ */
+			echo($tabla.'<br>');
+			echo($item1.'<br>'); 
+			echo $valor1.'<br>';
+			echo $valor.'<br>';
+			echo('esto aun es del modelo'.'<br>');
 	
 			$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
    
@@ -153,16 +157,11 @@ class ModeloProductos{
 		   $stmt -> close();
    
 		   $stmt = null;
-	   }
+	   /* } */
 
-		echo('esto es del modelo'.'<br>');
-/* 		var_dump($tabla.'<br>');*/
-/* 		var_dump($item1.'<br>'); 
-		echo $valor1.'<br>';
-		echo $valor.'<br>';
-		echo('esto aun es del modelo'.'<br>'); */
 
-		if($tabla == 'productos'){
+
+/* 		if($tabla == 'productos'){
 		switch ($valor) {
 			case '27':
 			$stmt = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
@@ -190,7 +189,7 @@ class ModeloProductos{
 			$stmt = null;
 				break;
 
-				/* case '40':
+				case '40':
 				$stmt = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = :id");
 				$stmt2 = Conexion::conectar()->prepare("UPDATE productos SET $item1 = :$item1 WHERE id = 27"); 
 
@@ -216,12 +215,12 @@ class ModeloProductos{
 				$stmt -> close();
 		
 				$stmt = null;
-				break;	 */
+				break;	
 
 			default:
 				break;
 		}
-	}
+	} */
 	
 
 

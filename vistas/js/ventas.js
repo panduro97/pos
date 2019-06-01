@@ -73,14 +73,15 @@ AGREGANDO PRODUCTOS A LA VENTA DESDE LA TABLA
 $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	var idProducto = $(this).attr("idProducto");
-	console.log(idProducto);
+	alert(idProducto);
 
 	$(this).removeClass("btn-primary agregarProducto");
 
 	$(this).addClass("btn-default");
 
 	var datos = new FormData();
-    datos.append("idProducto", idProducto);
+	datos.append("idProducto", idProducto);
+
 
      $.ajax({
 
@@ -92,10 +93,12 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
       	processData: false,
       	dataType:"json",
       	success:function(respuesta){
-
       	    var descripcion = respuesta["descripcion"];
           	var stock = respuesta["stock"];
           	var precio = respuesta["precio_venta"];
+						console.log(descripcion);
+						console.log(stock);
+						console.log(precio);
 
           	/*=============================================
           	EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
@@ -119,7 +122,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 					
 
 					
-						switch (idProducto) {
+					/* 	switch (idProducto) {
 							case '40':
 								alert(stock)
 								var stocks =	Number(stock-0.5)		
@@ -128,21 +131,21 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 								alert(stocks)
 			
 								break;
-							/* case '27':
+							case '27':
 									alert(stock)
 									var stocks =	Number(stock-1)		
 									alert('entro aqui 27')
 	
 									alert(stocks)
 				
-									break; */
+									break;
 							default:
 									var stocks =	 Number(stock-1);	
 									alert('entro aqui default')
 				
 									alert(stocks)
 								break;
-							} 
+							}  */
 						
 
 						
@@ -181,7 +184,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	          '<div class="col-xs-3">'+
 	            
-	             '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stocks)+'" required>'+
+	             '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>'+
 
 	          '</div>' +
 
@@ -201,9 +204,9 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 					'</div>') 
 					
-					var nombreProductos = $('nuevoStock').val(); 
+			/* 		var nombreProductos = $('nuevoStock').val(); 
 				
-				console.log(nombreProductos)
+				console.log(nombreProductos) */
 
 	        // SUMAR TOTAL DE PRECIOS
 
