@@ -71,7 +71,7 @@ class AjaxProductos{
 
     }else{
      /*  echo 'este es el shido 3'; */
-
+      
       $item = "id";
       $valor = $this->idProducto;
       $orden = "id";

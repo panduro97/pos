@@ -73,7 +73,6 @@ AGREGANDO PRODUCTOS A LA VENTA DESDE LA TABLA
 $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	var idProducto = $(this).attr("idProducto");
-	alert(idProducto);
 
 	$(this).removeClass("btn-primary agregarProducto");
 
@@ -118,47 +117,23 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 						}
 
-
-					
-
-					
-					/* 	switch (idProducto) {
-							case '40':
-								alert(stock)
-								var stocks =	Number(stock-0.5)		
-								alert('entro aqui 40')
-
-								alert(stocks)
-			
+						switch (idProducto) {
+							case '50':
+								var stocks = stock - 0.5
+								var cantidad = 0.5
+								alert (stocks)
 								break;
-							case '27':
-									alert(stock)
-									var stocks =	Number(stock-1)		
-									alert('entro aqui 27')
-	
-									alert(stocks)
-				
-									break;
+							case '48':
+								var stocks = stock - 1
+								var cantidad = 1
+								alert (stocks)
+
+								break;
 							default:
-									var stocks =	 Number(stock-1);	
-									alert('entro aqui default')
-				
-									alert(stocks)
+								var stocks = stock - 1
+								var cantidad = 0.5
 								break;
-							}  */
-						
-
-						
-						//'+Number(stock-1)+'
-
-						/* 	var idCategoria = $('#nuevaCategoria').val();
-   						$("#numberventas").attr("nuevoStock","Phone");
-
-							console.log(idCategoria); 	
-							
-							if(Number(idCategoria) == 11){
-								valores()
-							} */
+						}
 						
 					
 
@@ -184,7 +159,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	          '<div class="col-xs-3">'+
 	            
-	             '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="1" value="1" stock="'+stock+'" nuevoStock="'+Number(stock-1)+'" required>'+
+	             '<input type="number" class="form-control nuevaCantidadProducto" name="nuevaCantidadProducto" min="'+cantidad+'" value="'+cantidad+'" stock="'+stock+'" nuevoStock="'+Number(stocks)+'" required>'+
 
 	          '</div>' +
 

@@ -32,7 +32,7 @@ class ModeloProductos{
 
 		$stmt -> close();
 
-		$stmt = null;
+		$stmt = null; 
 
 	}
 
@@ -159,11 +159,11 @@ class ModeloProductos{
 		
 				$stmt = null;
 			}else{
-				$stmt = Conexion::conectar()->prepare("UPDATE stock inner join productos  on stock.relacion = productos.conexion SET $item1 = :$item1 WHERE productos.id = :id");
-				$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
-				$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
+				$stmt2 = Conexion::conectar()->prepare("UPDATE stock inner join productos  on stock.relacion = productos.conexion SET $item1 = :$item1 WHERE productos.id = :id");
+				$stmt2 -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
+				$stmt2 -> bindParam(":id", $valor, PDO::PARAM_STR);
 		
-				if($stmt -> execute()){
+				if($stmt2 -> execute()){
 		
 					return "ok";
 				
@@ -173,9 +173,9 @@ class ModeloProductos{
 		
 				}
 		
-				$stmt -> close();
+				$stmt2 -> close();
 		
-				$stmt = null;	
+				$stmt2 = null;	
 			}
 
 	   /* } */

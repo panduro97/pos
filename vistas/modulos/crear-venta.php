@@ -286,6 +286,8 @@ if($_SESSION["perfil"] == "Especial"){
 
           $guardarVenta = new ControladorVentas();
           $guardarVenta -> ctrCrearVenta();
+
+          
           
         ?>
 
