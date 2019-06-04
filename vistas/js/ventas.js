@@ -94,7 +94,8 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
       	success:function(respuesta){
       	    var descripcion = respuesta["descripcion"];
           	var stock = respuesta["stock"];
-          	var precio = respuesta["precio_venta"];
+						var precio = respuesta["precio_venta"];
+						console.log(respuesta);
 						console.log(descripcion);
 						console.log(stock);
 						console.log(precio);
@@ -118,7 +119,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 						}
 
 						switch (idProducto) {
-							case '50':
+/* 							case '50':
 								var stocks = stock - 0.5
 								var cantidad = 0.5
 								alert (stocks)
@@ -127,11 +128,10 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 								var stocks = stock - 1
 								var cantidad = 1
 								alert (stocks)
-
-								break;
+								break; */
 							default:
 								var stocks = stock - 1
-								var cantidad = 0.5
+								var cantidad = 1
 								break;
 						}
 						
@@ -338,7 +338,7 @@ $(".btnAgregarProducto").click(function(){
       	processData: false,
       	dataType:"json",
       	success:function(respuesta){
-      	    
+      	    alert(respuesta)
       	    	$(".nuevoProducto").append(
 
           	'<div class="row" style="padding:5px 15px">'+
@@ -731,11 +731,47 @@ function listarProductos(){
 							  "stock" : $(cantidad[i]).attr("nuevoStock"),
 							  "precio" : $(precio[i]).attr("precioReal"),
 								"total" : $(precio[i]).val()})
+								console.log('esta madre es la lista de productos');
+								/* console.log(typeof(listaProductos)); */
+								var encontre = listaProductos.find(pollo1);
+								var encontre2 = listaProductos.find(pollo2);
+							
+			
+
+								if(encontre == undefined){
+									encontre = 0;
+								}else if (encontre2 == undefined){
+									encontre2=0;
+								}
+								var stock1 = encontre.stock;
+								var stock2 = encontre2.stock;
+								console.log(stock1);
+								
+								console.log(stock2);
+								 var stockss= [];
+
+								stockss.push({
+									stock1,stock2
+								}) 
+								console.log('si jalo');
+							
+							localStorage.setItem("stockPollo", JSON.stringify(stockss));
+							var aver =	localStorage.getItem("stockPollo");
+							console.log(aver);
+							console.log(listaProductos);
 								
 	}
 
 	$("#listaProductos").val(JSON.stringify(listaProductos)); 
 
+}
+
+function pollo1(objeto) { 
+		return objeto.id === '50';
+}
+
+function pollo2(objeto) {
+	return objeto.id === '48';
 }
 
 /*=============================================
