@@ -171,7 +171,10 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 	              '<span class="input-group-addon"><i class="ion ion-social-usd"></i></span>'+
 	                 
-	              '<input type="text" class="form-control nuevoPrecioProducto" precioReal="'+precio+'" name="nuevoPrecioProducto" value="'+precio+'" readonly required>'+
+								'<input type="text" class="form-control nuevoPrecioProducto" precioReal="'+precio+'" name="nuevoPrecioProducto" value="'+precio+'" readonly required>'+
+								
+	              '<input type="hidden" class="form-control stockReal" stockReal="'+stock+'" name="stockReal" value="'+stock+'" readonly required>'+
+
 	 
 	            '</div>'+
 	             
@@ -723,6 +726,10 @@ function listarProductos(){
 
 	var precio = $(".nuevoPrecioProducto");
 
+	var stockReal = $(".stockReal");
+
+
+
 	for(var i = 0; i < descripcion.length; i++){
 
 		listaProductos.push({ "id" : $(descripcion[i]).attr("idProducto"), 
@@ -731,36 +738,55 @@ function listarProductos(){
 							  "stock" : $(cantidad[i]).attr("nuevoStock"),
 							  "precio" : $(precio[i]).attr("precioReal"),
 								"total" : $(precio[i]).val()})
-								console.log('esta madre es la lista de productos');
-								/* console.log(typeof(listaProductos)); */
-								var encontre = listaProductos.find(pollo1);
-								var encontre2 = listaProductos.find(pollo2);
-							
-			
-
-								if(encontre == undefined){
-									encontre = 0;
-								}else if (encontre2 == undefined){
-									encontre2=0;
-								}
-								var stock1 = encontre.stock;
-								var stock2 = encontre2.stock;
-								console.log(stock1);
-								
-								console.log(stock2);
-								 var stockss= [];
-
-								stockss.push({
-									stock1,stock2
-								}) 
-								console.log('si jalo');
-							
-							localStorage.setItem("stockPollo", JSON.stringify(stockss));
-							var aver =	localStorage.getItem("stockPollo");
-							console.log(aver);
-							console.log(listaProductos);
-								
 	}
+
+					console.log('esta madre es la lista de productos');
+					var encontre = listaProductos.find(pollo1);
+					var encontre2 = listaProductos.find(pollo2);
+
+					if(encontre == undefined){
+						encontre = 0;
+					}else if (encontre2 == undefined){
+						encontre2=0;
+					}
+					var stock1 = Number(encontre.stock) + 0.5;
+					var stock2 = Number(encontre2.stock);
+
+					var stockss= [];
+
+					stockss.push({
+						stock1,stock2
+					}) 
+
+				localStorage.setItem("stockPollo", JSON.stringify(stockss));
+				var aver =	localStorage.getItem("stockPollo");
+
+				ReturnStock = (JSON.parse(aver)[0].stock1);
+				ReturnStock2 = (JSON.parse(aver)[0].stock2);
+				stockActual = stockReal.val()
+
+				if(ReturnStock == null)
+				{
+					var	stockFinal = ReturnStock2 + ReturnStock2 - stockActual;
+					console.log('objeto 1')
+					console.log(stockFinal)
+				}
+				else if(ReturnStock2 == null)
+				{
+					var	stockFinal = ReturnStock + ReturnStock - stockActual;
+					console.log('objeto 2')
+					console.log(stockFinal)
+				}else{
+					var	stockFinal = ReturnStock + ReturnStock2 - stockActual;
+					console.log('dos objetos')
+					console.log(stockFinal)
+				encontre.stock = stockFinal
+				encontre2.stock = stockFinal
+
+				
+				}
+
+				
 
 	$("#listaProductos").val(JSON.stringify(listaProductos)); 
 

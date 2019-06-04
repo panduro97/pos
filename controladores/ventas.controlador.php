@@ -83,22 +83,10 @@ class ControladorVentas{
 
 				
 
-			 	switch ($valor) {
-					case '48':
-						echo 'entro <br>';
-						$item1b = "stock";
-						$valor1b = (int)$value["stock"] - 0.5;
-						echo 'aqui esta el valor <br>';
-						var_dump(  $valor1b .'<br>'); /* = $valor1b - 0.5; */
-						break;
-				/* 	case '48':
-						
-						break; */
-					default:
+
 						$item1b = "stock";
 						$valor1b = $value["stock"];
-						break;
-				} 
+
 /* 
 				var_dump($tablaProductos."<br>");
 				var_dump($item1b."<br>");*/
