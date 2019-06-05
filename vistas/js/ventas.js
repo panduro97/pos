@@ -115,16 +115,16 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 									}else{
 										var stook = stock - 0.5
 									}
-									
-									alert('stock1')
-									alert (stook)
 									break;
 								case '48':
 									var stook = stock - 1
 									var cantidad = 1
-									alert('stock2')
-									alert (stook)
 									break;
+
+									case '53':
+										var stook = stock - 1.5
+										var cantidad = 1
+										break;
 								default:
 									var stook = stock - 1
 									var cantidad = 1
@@ -133,7 +133,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
           	if(stook <= 0){
 
       			swal({
-			      title: "No hay stock disponible 1",
+			      title: "No hay stock disponible",
 			      type: "error",
 			      confirmButtonText: "¡Cerrar!"
 			    });
@@ -755,22 +755,41 @@ function listarProductos(){
 					console.log(listaProductos);
 					var encontre = listaProductos.find(pollo1);
 					var encontre2 = listaProductos.find(pollo2);
+					var encontre3 = listaProductos.find(pollo3);
+					console.log(encontre)
+					console.log(encontre2)
+					console.log(encontre3)
 
 					if(encontre == undefined){
 						encontre = 0;
 					}else if(encontre2 == undefined){
-						encontre2=0;
+						encontre2 = 0;
+					}else if(encontre3 == undefined){
+						encontre3 = 0;
 					}
+					console.log(encontre)
+					console.log(encontre2)
+
+					console.log(encontre3)
+
 					var stock1 = Number(encontre.stock) + 0.5;
-					var stock2 = Number(encontre2.stock) ;
-					alert('aquiii')
-					alert(stock1)
-					alert(stock2)
+					console.log('1')
+
+					console.log(stock1)
+
+					var stock2 = Number(encontre2.stock);
+					console.log('2')
+
+					console.log(stock2)
+
+					var stock3 = Number(encontre3.stock) - 0.5;
+					console.log('esta madre es el stock del pollo y medio')
+					console.log(stock3)
 
 					var stockss= [];
 
 					stockss.push({
-						stock1,stock2
+						stock1,stock2,stock3
 					}) 
 
 				localStorage.setItem("stockPollo", JSON.stringify(stockss));
@@ -778,52 +797,30 @@ function listarProductos(){
 
 				ReturnStock = (JSON.parse(aver)[0].stock1);
 				ReturnStock2 = (JSON.parse(aver)[0].stock2);
+				ReturnStock3 = (JSON.parse(aver)[0].stock3);
+
 					console.log('aqui');
-					console.log(ReturnStock);
-					console.log(ReturnStock2);
+					console.log(ReturnStock3);
 	/* 			alert(ReturnStock)
 				alert(ReturnStock2) */
 
-				stockActual = stockReal.val()
+				var stockActual = stockReal.val()
 
-				if(ReturnStock == null)
+				if(ReturnStock == null && ReturnStock3 == null)
 				{	
-				 	if(ReturnStock == 0 && stockActual != 0)
+				 	/* if(ReturnStock == 0 && stockActual != 0)
 					{
 						ReturnStock2 = 0.5
 						var	stockFinal = ReturnStock2 + ReturnStock2 - stockActual;
 						encontre.stock = String(stockFinal)
 						encontre2.stock = String(stockFinal)
-					} 
-					var	stockFinal = ReturnStock2 + ReturnStock2 - stockActual;
-					alert('aqui')
+					}  */
+					var	stockFinal = ReturnStock2;
+					alert('aquiaaaaa')
 					alert(stockFinal)
 					alert(ReturnStock2)
 					alert(stockActual)
 
-					if(stockFinal <= 0){
-						swal({
-							title: "No hay stock disponible 2",
-							type: "error",
-							confirmButtonText: "¡Cerrar!"
-						});
-					}
-					encontre.stock = String(stockFinal)
-					encontre2.stock = String(stockFinal)
-					/* alert(encontre.stock); */
-
-				}
-				else if(ReturnStock2 == null)
-				{
-					/* if(ReturnStock == 0 && stockActual != 0)
-					{
-						ReturnStock = 0.25
-						var	stockFinal = ReturnStock + ReturnStock - stockActual;
-						encontre.stock = String(stockFinal)
-						encontre2.stock = String(stockFinal)
-					} */
-					var	stockFinal =  ReturnStock;
-					/* alert(stockFinal) */
 					if(stockFinal <= 0){
 						swal({
 							title: "No hay stock disponible o este fue la pieza final",
@@ -833,9 +830,50 @@ function listarProductos(){
 					}
 					encontre.stock = String(stockFinal)
 					encontre2.stock = String(stockFinal)
+					encontre3.stock = String(stockFinal)
 
-				}else{
-					var	stockFinal = ReturnStock + ReturnStock2 - stockActual;
+
+				}
+				else if(ReturnStock2 == null && ReturnStock3 == null)
+				{
+					/* if(ReturnStock == 0 && stockActual != 0)
+					{
+						ReturnStock = 0.25
+						var	stockFinal = ReturnStock + ReturnStock - stockActual;
+						encontre.stock = String(stockFinal)
+						encontre2.stock = String(stockFinal)
+					} */
+					var	stockFinal =  ReturnStock;
+					if(stockFinal <= 0){
+						swal({
+							title: "No hay stock disponible o este fue la pieza final",
+							type: "error",
+							confirmButtonText: "¡Cerrar!"
+						});
+					}
+					encontre.stock = String(stockFinal)
+					encontre2.stock = String(stockFinal)
+					encontre3.stock = String(stockFinal)
+
+
+				}else if(ReturnStock == null && ReturnStock2 == null){
+
+					var	stockFinal =  ReturnStock3;
+					if(stockFinal <= 0){
+						swal({
+							title: "No hay stock disponible o este fue la pieza final",
+							type: "error",
+							confirmButtonText: "¡Cerrar!"
+						});
+					}
+					encontre.stock = String(stockFinal)
+					encontre2.stock = String(stockFinal)
+					encontre3.stock = String(stockFinal)
+
+					alert(encontre.stock);
+				}
+				else{
+					var	stockFinal = ReturnStock + ReturnStock2 + ReturnStock3 - stockActual;
 					if(stockFinal <= 0){
 						swal({
 							title: "No hay stock disponible",
@@ -862,6 +900,10 @@ function pollo1(objeto) {
 
 function pollo2(objeto) {
 	return objeto.id === '48';
+}
+
+function pollo3(objeto) {
+	return objeto.id === '53';
 }
 
 /*=============================================
