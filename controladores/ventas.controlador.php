@@ -90,10 +90,10 @@ class ControladorVentas{
 /* 
 				var_dump($tablaProductos."<br>");
 				var_dump($item1b."<br>");*/
-				echo 'esto es otro pdo de las ventas';
+	/* 			echo 'esto es otro pdo de las ventas';
 				var_dump($valor1b."<br>");
 				var_dump($valor."<br>"); 
-
+ */
 				
 
 				$nuevoStock = ModeloProductos::mdlActualizarProducto($tablaProductos, $item1b, $valor1b, $valor);

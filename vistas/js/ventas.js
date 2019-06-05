@@ -102,12 +102,38 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
           	/*=============================================
           	EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
-          	=============================================*/
-
-          	if(stock == 0){
+						=============================================*/
+						var stocks = stock - 1
+					
+						switch (idProducto) {
+								case '50':
+									var prueba = stock - 0.5
+									alert(prueba)
+									var cantidad = 0.5
+									if(prueba<=0 && stock > 0){
+										var stook = 0.5
+									}else{
+										var stook = stock - 0.5
+									}
+									
+									alert('stock1')
+									alert (stook)
+									break;
+								case '48':
+									var stook = stock - 1
+									var cantidad = 1
+									alert('stock2')
+									alert (stook)
+									break;
+								default:
+									var stook = stock - 1
+									var cantidad = 1
+									break;
+							}
+          	if(stook <= 0){
 
       			swal({
-			      title: "No hay stock disponible"+idProducto,
+			      title: "No hay stock disponible 1",
 			      type: "error",
 			      confirmButtonText: "¡Cerrar!"
 			    });
@@ -118,22 +144,7 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 
 						}
 
-						switch (idProducto) {
-/* 							case '50':
-								var stocks = stock - 0.5
-								var cantidad = 0.5
-								alert (stocks)
-								break;
-							case '48':
-								var stocks = stock - 1
-								var cantidad = 1
-								alert (stocks)
-								break; */
-							default:
-								var stocks = stock - 1
-								var cantidad = 1
-								break;
-						}
+
 						
 					
 
@@ -741,16 +752,20 @@ function listarProductos(){
 	}
 
 					console.log('esta madre es la lista de productos');
+					console.log(listaProductos);
 					var encontre = listaProductos.find(pollo1);
 					var encontre2 = listaProductos.find(pollo2);
 
 					if(encontre == undefined){
 						encontre = 0;
-					}else if (encontre2 == undefined){
+					}else if(encontre2 == undefined){
 						encontre2=0;
 					}
 					var stock1 = Number(encontre.stock) + 0.5;
-					var stock2 = Number(encontre2.stock);
+					var stock2 = Number(encontre2.stock) ;
+					alert('aquiii')
+					alert(stock1)
+					alert(stock2)
 
 					var stockss= [];
 
@@ -763,25 +778,74 @@ function listarProductos(){
 
 				ReturnStock = (JSON.parse(aver)[0].stock1);
 				ReturnStock2 = (JSON.parse(aver)[0].stock2);
+					console.log('aqui');
+					console.log(ReturnStock);
+					console.log(ReturnStock2);
+	/* 			alert(ReturnStock)
+				alert(ReturnStock2) */
+
 				stockActual = stockReal.val()
 
 				if(ReturnStock == null)
-				{
+				{	
+				 	if(ReturnStock == 0 && stockActual != 0)
+					{
+						ReturnStock2 = 0.5
+						var	stockFinal = ReturnStock2 + ReturnStock2 - stockActual;
+						encontre.stock = String(stockFinal)
+						encontre2.stock = String(stockFinal)
+					} 
 					var	stockFinal = ReturnStock2 + ReturnStock2 - stockActual;
-					console.log('objeto 1')
-					console.log(stockFinal)
+					alert('aqui')
+					alert(stockFinal)
+					alert(ReturnStock2)
+					alert(stockActual)
+
+					if(stockFinal <= 0){
+						swal({
+							title: "No hay stock disponible 2",
+							type: "error",
+							confirmButtonText: "¡Cerrar!"
+						});
+					}
+					encontre.stock = String(stockFinal)
+					encontre2.stock = String(stockFinal)
+					/* alert(encontre.stock); */
+
 				}
 				else if(ReturnStock2 == null)
 				{
-					var	stockFinal = ReturnStock + ReturnStock - stockActual;
-					console.log('objeto 2')
-					console.log(stockFinal)
+					/* if(ReturnStock == 0 && stockActual != 0)
+					{
+						ReturnStock = 0.25
+						var	stockFinal = ReturnStock + ReturnStock - stockActual;
+						encontre.stock = String(stockFinal)
+						encontre2.stock = String(stockFinal)
+					} */
+					var	stockFinal =  ReturnStock;
+					/* alert(stockFinal) */
+					if(stockFinal <= 0){
+						swal({
+							title: "No hay stock disponible o este fue la pieza final",
+							type: "error",
+							confirmButtonText: "¡Cerrar!"
+						});
+					}
+					encontre.stock = String(stockFinal)
+					encontre2.stock = String(stockFinal)
+
 				}else{
 					var	stockFinal = ReturnStock + ReturnStock2 - stockActual;
-					console.log('dos objetos')
-					console.log(stockFinal)
-				encontre.stock = stockFinal
-				encontre2.stock = stockFinal
+					if(stockFinal <= 0){
+						swal({
+							title: "No hay stock disponible",
+							type: "error",
+							confirmButtonText: "¡Cerrar!"
+						});
+					}
+
+					encontre.stock = String(stockFinal)
+					encontre2.stock = String(stockFinal)
 
 				
 				}
