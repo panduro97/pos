@@ -154,9 +154,9 @@ Tiempo de coccion POIOS 7200000
 $("#modalAgregarProducto").on("click", "button.enviar",function(){
 
 	var idCategoria = $('#nuevaCategoria').val();
-	console.log(idCategoria); 	
+	alert(idCategoria); 	
 	
-	if(Number(idCategoria) == 11){
+	if(Number(idCategoria) == 12){
 		valores()
 	}
 
