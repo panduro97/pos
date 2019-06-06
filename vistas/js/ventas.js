@@ -104,30 +104,30 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
           	EVITAR AGREGAR PRODUTO CUANDO EL STOCK ESTÁ EN CERO
 						=============================================*/
 						var stocks = stock - 1
-					
+						var cantidad = 1
 						switch (idProducto) {
 								case '50':
 									var prueba = stock - 0.5
 									alert(prueba)
-									var cantidad = 0.5
+									
 									if(prueba<=0 && stock > 0){
-										var stook = 0.5
+									
 									}else{
 										var stook = stock - 0.5
 									}
 									break;
 								case '48':
 									var stook = stock - 1
-									var cantidad = 1
+									
 									break;
 
 									case '53':
 										var stook = stock - 1.5
-										var cantidad = 1
+									
 										break;
 								default:
 									var stook = stock - 1
-									var cantidad = 1
+								
 									break;
 							}
           	if(stook <= 0){
@@ -186,7 +186,8 @@ $(".tablaVentas tbody").on("click", "button.agregarProducto", function(){
 								
 	              '<input type="hidden" class="form-control stockReal" stockReal="'+stock+'" name="stockReal" value="'+stock+'" readonly required>'+
 
-	 
+	              '<input type="hidden" class="form-control stockReal" stockReal="'+stock+'" name="stockReal" value="'+stock+'" readonly required>'+
+
 	            '</div>'+
 	             
 	          '</div>'+
@@ -756,74 +757,180 @@ function listarProductos(){
 					var encontre = listaProductos.find(pollo1);
 					var encontre2 = listaProductos.find(pollo2);
 					var encontre3 = listaProductos.find(pollo3);
+					var encontre4 = listaProductos.find(pollo4);
+					var encontre5 = listaProductos.find(pollo5);
+					var encontre6 = listaProductos.find(pollo6);
+
+					
+					
+					if(encontre5){
+						var cantidadTacos = encontre5.cantidad
+						var stockTacos = encontre5.stock;
+						var stockATacos = stockReal.val();
+
+						if(cantidadTacos > 1) {
+							var	nuevoStockTacos = stockATacos - (8 * cantidadTacos)
+							if(nuevoStockTacos <= 0){
+								swal({
+									title: "No hay stock Suficiente, baja la cantidad a vender!",
+									type: "error",
+									confirmButtonText: "¡Cerrar!"
+								});
+							}
+							encontre5.stock = String(nuevoStockTacos)
+						/* 	console.log(nuevoStockTacos); */
+						}else{
+							var nuevoStockTacos = stockTacos - 7
+							if(nuevoStockTacos <= 0){
+								swal({
+									title: "No hay stock Suficiente, baja la cantidad a vender!",
+									type: "error",
+									confirmButtonText: "¡Cerrar!"
+								});
+							}
+							encontre5.stock = String(nuevoStockTacos)
+						/* 	console.log('entro en el else');
+							console.log(nuevoStockTacos); */
+						}
+
+				/* 		console.log(cantidadTacos);
+						console.log(stockTacos);
+						console.log(stockATacos);
+						console.log(listaProductos); */
+					}
+
+					if(encontre6){
+						var cantidadPezcuezo = encontre6.cantidad
+						var stockPezcuezo = encontre6.stock;
+						var stockAPezcuezo = stockReal.val();
+
+						if(cantidadPezcuezo > 1) {
+							var	nuevoStockPezcuezo = stockAPezcuezo - (5 * cantidadPezcuezo)
+							if(nuevoStockPezcuezo <= 0){
+								swal({
+									title: "No hay stock Suficiente, baja la cantidad a vender!",
+									type: "error",
+									confirmButtonText: "¡Cerrar!"
+								});
+							}
+							encontre5.stock = String(nuevoStockPezcuezo)
+							console.log(nuevoStockPezcuezo);
+						}else{
+							var nuevoStockPezcuezo = stockPezcuezo - 4
+							if(nuevoStockPezcuezo <= 0){
+								swal({
+									title: "No hay stock Suficiente, baja la cantidad a vender!",
+									type: "error",
+									confirmButtonText: "¡Cerrar!"
+								});
+							}
+							encontre6.stock = String(nuevoStockPezcuezo)
+							console.log('entro en el else');
+							console.log(nuevoStockPezcuezo);
+						}
+
+						console.log(cantidadTacos);
+						console.log(stockTacos);
+						console.log(stockATacos);
+						console.log(listaProductos);
+					}
+
+		/* 			console.log('el primero');
 					console.log(encontre)
 					console.log(encontre2)
 					console.log(encontre3)
+					console.log(encontre4)
+					console.log(encontre5) */
+
+
 
 					if(encontre == undefined){
 						encontre = 0;
-					}else if(encontre2 == undefined){
+					}
+					if(encontre2 == undefined){
 						encontre2 = 0;
-					}else if(encontre3 == undefined){
+					}
+					if(encontre3 == undefined){
 						encontre3 = 0;
 					}
-					console.log(encontre)
-					console.log(encontre2)
+					if(encontre4 == undefined){
+						encontre4 = 0;
+					}
 
-					console.log(encontre3)
+			/* 		console.log('el segundo');
+					console.log(encontre4) */
 
-					var stock1 = Number(encontre.stock) + 0.5;
-					console.log('1')
+					var cantPollo = Number(encontre.cantidad);
+					var cantMedioP = Number(encontre2.cantidad);
+					var cantPolloM = Number(encontre3.cantidad);
+					var cantCuartoP = Number(encontre4.cantidad);
+					
+					var stockOriginal = stockReal.val()
 
-					console.log(stock1)
+					localStorage.setItem("stockOriginal", stockOriginal);
+					var resultadoOriginal =	localStorage.getItem("stockOriginal");
 
-					var stock2 = Number(encontre2.stock);
-					console.log('2')
+					if( cantPollo > 1 || cantMedioP > 1 || cantPolloM > 1){
+						var stock1 = resultadoOriginal - (1 * cantPollo);
+						var stock2 = resultadoOriginal - (0.5 * cantMedioP);
+						var stock3 = resultadoOriginal - (1.5 * cantPolloM);
+						var stock4 = resultadoOriginal - (0.25 * cantCuartoP);
+						if(stock1 <=0 || stock2<=0 || stock3<=0 || stock4<=0){
+							swal({
+								title: "No hay stock Suficiente, baja la cantidad a vender!",
+								type: "error",
+								confirmButtonText: "¡Cerrar!"
+							});
+						}
+						storage.removeItem("stockOriginal");
+					/* 	console.log('cantidades');					
+						console.log(stock4)
+						console.log(resultadoOriginal);
+						console.log(cantPollo);
+						console.log(Number(encontre.stock) + 0.5); */
+					}else{
+						var stock1 = Number(encontre.stock) + 0.5;
+						var stock2 = Number(encontre2.stock);
+						var stock3 = Number(encontre3.stock) - 0.5;
+						var stock4 = Number(encontre4.stock) + 0.75;
 
-					console.log(stock2)
+					
+					}
 
-					var stock3 = Number(encontre3.stock) - 0.5;
-					console.log('esta madre es el stock del pollo y medio')
-					console.log(stock3)
+
+				/* 	console.log('el tercero');
+					console.log(stock4) */
+
 
 					var stockss= [];
 
 					stockss.push({
-						stock1,stock2,stock3
+						stock1,stock2,stock3,stock4
 					}) 
 
 				localStorage.setItem("stockPollo", JSON.stringify(stockss));
 				var aver =	localStorage.getItem("stockPollo");
 
-				ReturnStock = (JSON.parse(aver)[0].stock1);
-				ReturnStock2 = (JSON.parse(aver)[0].stock2);
-				ReturnStock3 = (JSON.parse(aver)[0].stock3);
+				var ReturnStock = (JSON.parse(aver)[0].stock1);
+				var ReturnStock2 = (JSON.parse(aver)[0].stock2);
+				var ReturnStock3 = (JSON.parse(aver)[0].stock3);
+				var ReturnStock4 = (JSON.parse(aver)[0].stock4);
 
-					console.log('aqui');
-					console.log(ReturnStock3);
-	/* 			alert(ReturnStock)
-				alert(ReturnStock2) */
+
+				
+			/* 	console.log('el cuarto');
+				console.log(ReturnStock4)
+ */
+		
 
 				var stockActual = stockReal.val()
 
-				if(ReturnStock == null && ReturnStock3 == null)
+				if(ReturnStock2 != null && ReturnStock == null && ReturnStock3 == null && ReturnStock4 == null)
 				{	
-				 	/* if(ReturnStock == 0 && stockActual != 0)
-					{
-						ReturnStock2 = 0.5
-						var	stockFinal = ReturnStock2 + ReturnStock2 - stockActual;
-						encontre.stock = String(stockFinal)
-						encontre2.stock = String(stockFinal)
-					}  */
 					var	stockFinal = ReturnStock2;
-					alert('aquiaaaaa')
-					alert(stockFinal)
-					alert(ReturnStock2)
-					alert(stockActual)
-
 					if(stockFinal <= 0){
 						swal({
-							title: "No hay stock disponible o este fue la pieza final",
+							title: "No hay stock disponible o esta fue la pieza final, disminuya la cantidad.1",
 							type: "error",
 							confirmButtonText: "¡Cerrar!"
 						});
@@ -831,10 +938,11 @@ function listarProductos(){
 					encontre.stock = String(stockFinal)
 					encontre2.stock = String(stockFinal)
 					encontre3.stock = String(stockFinal)
-
+				/* 	console.log('henlo');
+					console.log(encontre2); */
 
 				}
-				else if(ReturnStock2 == null && ReturnStock3 == null)
+				else if(ReturnStock != null && ReturnStock2 == null && ReturnStock3 == null  && ReturnStock4 == null)
 				{
 					/* if(ReturnStock == 0 && stockActual != 0)
 					{
@@ -846,7 +954,7 @@ function listarProductos(){
 					var	stockFinal =  ReturnStock;
 					if(stockFinal <= 0){
 						swal({
-							title: "No hay stock disponible o este fue la pieza final",
+							title: "No hay stock disponible o esta fue la pieza final, disminuya la cantidad.2",
 							type: "error",
 							confirmButtonText: "¡Cerrar!"
 						});
@@ -854,14 +962,15 @@ function listarProductos(){
 					encontre.stock = String(stockFinal)
 					encontre2.stock = String(stockFinal)
 					encontre3.stock = String(stockFinal)
+				/* 	console.log('henlo1');
+					console.log(encontre); */
 
-
-				}else if(ReturnStock == null && ReturnStock2 == null){
+				}else if(ReturnStock3 != null && ReturnStock == null && ReturnStock2 == null  && ReturnStock4 == null){
 
 					var	stockFinal =  ReturnStock3;
 					if(stockFinal <= 0){
 						swal({
-							title: "No hay stock disponible o este fue la pieza final",
+							title: "No hay stock disponible o esta fue la pieza final, disminuya la cantidad.3",
 							type: "error",
 							confirmButtonText: "¡Cerrar!"
 						});
@@ -870,25 +979,52 @@ function listarProductos(){
 					encontre2.stock = String(stockFinal)
 					encontre3.stock = String(stockFinal)
 
-					alert(encontre.stock);
+				/* 	console.log(encontre3); */
+				}
+				else if(ReturnStock4 != null && ReturnStock == null && ReturnStock2 == null  && ReturnStock3 == null){
+
+					var	stockFinal =  ReturnStock4;
+					if(stockFinal <= 0){
+						swal({
+							title: "No hay stock disponible o esta fue la pieza final, disminuya la cantidad.4",
+							type: "error",
+							confirmButtonText: "¡Cerrar!"
+						});
+					}
+					encontre.stock = String(stockFinal)
+					encontre2.stock = String(stockFinal)
+					encontre3.stock = String(stockFinal)
+					encontre4.stock = String(stockFinal)
+
+
+					/* console.log(encontre4); */
 				}
 				else{
-					var	stockFinal = ReturnStock + ReturnStock2 + ReturnStock3 - stockActual;
-					if(stockFinal <= 0){
+					var	stockFinal = ReturnStock + ReturnStock2 + ReturnStock3 + ReturnStock4 - stockActual;
+				/* 	console.log('el gran final');
+					console.log(ReturnStock);
+					console.log(ReturnStock2);
+					console.log(ReturnStock3);
+					console.log(ReturnStock4);
+					console.log(stockActual); */
+					/* if(stockFinal <= 0 && stockActual > stockFinal){
 						swal({
 							title: "No hay stock disponible",
 							type: "error",
 							confirmButtonText: "¡Cerrar!"
 						});
-					}
+					} */
 
 					encontre.stock = String(stockFinal)
 					encontre2.stock = String(stockFinal)
+					encontre3.stock = String(stockFinal)
+					encontre4.stock = String(stockFinal)
+
 
 				
 				}
 
-				
+			/* 	console.log(listaProductos); */
 
 	$("#listaProductos").val(JSON.stringify(listaProductos)); 
 
@@ -904,6 +1040,18 @@ function pollo2(objeto) {
 
 function pollo3(objeto) {
 	return objeto.id === '53';
+}
+
+function pollo4(objeto) {
+	return objeto.id === '54';
+}
+
+function pollo5(objeto) {
+	return objeto.id === '55';
+}
+
+function pollo6(objeto) {
+	return objeto.id === '57';
 }
 
 /*=============================================
