@@ -95,7 +95,7 @@ function valores(){
 	minuto = momentoActual.getMinutes() 
 	segundo = momentoActual.getSeconds() 
 		
-	var horaFinal = minuto + 1
+	var horaFinal = hora + 2
 
 	localStorage.setItem('horaF', horaFinal);
 	cocinado();
@@ -106,13 +106,9 @@ function cocinado() {
 
         
 
-		/* horaActual = hora + " : " + minuto + " : " + segundo  */
-		/* horaFinal = hora + " : " + minuto + 2 + " : " + segundo  */
 		momentoActual = new Date() 	
-		var minuto = momentoActual.getMinutes() 
-		console.log(minuto);
+		var minuto = momentoActual.getHours() 
 		var TiempoF = localStorage.getItem('horaF');
-		console.log(Number(TiempoF));
 		if(minuto >= Number(TiempoF)  ){
 			localStorage.removeItem('horaF')
 			$.ajax({
@@ -129,15 +125,8 @@ function cocinado() {
 		}else{
 			console.log('no es igual');
 			console.log(minuto);
-			setInterval(cocinado, 30000);
+			setInterval(cocinado, 300000);
 		}
- 
-        //La función se tendrá que llamar así misma para que sea dinámica, 
-        //de esta forma:
-
-		//setTimeout(mueveReloj,1000)
-		
-	/*   */
 }
 
 $( document ).ready(function() {
@@ -151,16 +140,14 @@ $( document ).ready(function() {
 /*=============================================
 Tiempo de coccion POIOS 7200000
 =============================================*/
-$("#modalAgregarProducto").on("click", "button.enviar",function(){
+$("#modalEditarProducto").on("click", "button.editado",function(){
 
-	var idCategoria = $('#nuevaCategoria').val();
-	alert(idCategoria); 	
+	var idCategoria = $('#editarCodigo').val();
 	
-	if(Number(idCategoria) == 12){
+	 if(Number(idCategoria) == 1201){
 		valores()
 	}
 
-/*   */
 
 })
 

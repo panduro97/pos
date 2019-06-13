@@ -46,6 +46,53 @@ $('#daterange-btn2').daterangepicker(
 
 )
 
+function valores(){
+	momentoActual = new Date() 
+	hora = momentoActual.getHours() 
+	minuto = momentoActual.getMinutes() 
+	segundo = momentoActual.getSeconds() 
+		
+	var horaFinal = hora + 2
+
+	localStorage.setItem('horaF', horaFinal);
+	cocinado();
+}
+
+
+function cocinado() {
+
+        
+
+		momentoActual = new Date() 	
+		var minuto = momentoActual.getHours() 
+		var TiempoF = localStorage.getItem('horaF');
+		if(minuto >= Number(TiempoF)  ){
+			localStorage.removeItem('horaF')
+			$.ajax({
+				type: "POST",
+				url: 'ajax/tiempo.ajax.php',
+				data: {data:true},
+				dataType: "json",
+				success:function(){
+
+					alert('Producto Listo para la venta!')
+						  
+				}
+			  });
+		}else{
+			console.log('no es igual');
+			console.log(minuto);
+			setInterval(cocinado, 300000);
+		}
+}
+
+$( document ).ready(function() {
+	var TiempoF = localStorage.getItem('horaF');
+	if(TiempoF){
+		valores()
+	}	
+});
+
 /*=============================================
 CANCELAR RANGO DE FECHAS
 =============================================*/
