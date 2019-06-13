@@ -59,35 +59,22 @@
           }
           $consulta = "SELECT * FROM gastos";
           $datos = $conn->query($consulta);
-<<<<<<< HEAD
-          while ($row=mysqli_fetch_array($datos)){
-            echo " <tr>";
-            echo "<td>".$row['id']."</td>";
-=======
           $var=0;
           while ($row=mysqli_fetch_array($datos)){
             echo " <tr>";
             echo "<td>".$row['id']."</td>"; 
             echo "<input type='hidden' class='id' cont='".$var."' value=".$row['id'].">";
->>>>>>> f17d162d08acbde6e7e12717c8a124fac1b14b0c
             echo "<td>000".$row['id']."</td>";
             echo "<td>".$row['descripcion']."</td>";
             echo "<td>".$row['dinero']."</td>";
             echo "<td>".$row['fecha']."</td>";
             echo "<td>";
             echo "<div class='btn-group'>";
-<<<<<<< HEAD
-            echo "<button class='btn btn-danger'><i class='fa fa-times'></i></button>";
-            echo "</div>";
-            echo "</td>";
-            echo "</tr>";
-=======
-            echo "<button class='btn btn-danger borrar'><i class='fa fa-times borrar'></i></button>";
+            echo "<button class='btn btn-danger ' onClick='borrar(".$row['id'].")'><i class='fa fa-times borrar'></i></button>";
             echo "</div>";
             echo "</td>";
             echo "</tr>";
             $var++;
->>>>>>> f17d162d08acbde6e7e12717c8a124fac1b14b0c
           }
             ?>
            

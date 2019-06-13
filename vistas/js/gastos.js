@@ -23,21 +23,19 @@ $("#modalAgregarProducto").on("click", "button.enviar", function(){
 
      })
 
-<<<<<<< HEAD
-=======
 })
 
-$(".tablas").on("click", "button.borrar", function(){
+function borrar(id) {
+    console.log(id)
+    var parametro = {
+        id : id
+    }
 
-    var variable = $('.id')
-    
-    console.log(variable)
+    $.ajax({
 
-  /*   $.ajax({
-
-        url:"controladores/gastos.controlador.php",
+        url:"controladores/borrarGastos.controlador.php",
          method: "POST",
-         data: parametros,
+         data: parametro,
          dataType:"json",
          success:function(respuesta){
            
@@ -45,7 +43,17 @@ $(".tablas").on("click", "button.borrar", function(){
 
          }
 
-     }) */
+     })
 
->>>>>>> f17d162d08acbde6e7e12717c8a124fac1b14b0c
-})
+     location.reload();
+
+}
+/* $(".tablas").on("click", "button.borrar", function(){
+
+    var variable = $('.id').attr('value')
+    
+    console.log(variable)
+
+
+
+}) */
