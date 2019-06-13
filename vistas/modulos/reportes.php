@@ -73,6 +73,10 @@ if($_SESSION["perfil"] == "Especial" || $_SESSION["perfil"] == "Vendedor"){
 
           </a>
 
+          
+            <button class="btn btn-danger corte" style="margin-top:5px">Corte de Caja</button>          
+         
+
         </div>
          
       </div>

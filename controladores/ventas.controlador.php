@@ -141,7 +141,7 @@ class ControladorVentas{
 
 			if($respuesta == "ok"){
 
-/* 			$impresora = "RPT-008";
+			$impresora = "RPT-008";
 
 				$conector = new WindowsPrintConnector($impresora);
 
@@ -238,7 +238,7 @@ class ControladorVentas{
 								}
 							})
 
-				</script>'; */
+				</script>';
 
 			}
 
