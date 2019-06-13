@@ -151,5 +151,18 @@ $(".daterangepicker.opensright .ranges li").on("click", function(){
 })
 
 
+$(".corte").on("click", function(){
+	$.ajax({
+		type: "POST",
+		url: 'ajax/tiempo.ajax.php',
+		data: {data:true},
+		dataType: "json",
+		success:function(){
+
+			alert('Producto Listo para la venta!')
+				  
+		}
+	  });
+})
 
 
