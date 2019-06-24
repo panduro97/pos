@@ -70,7 +70,7 @@
             echo "<td>".$row['fecha']."</td>";
             echo "<td>";
             echo "<div class='btn-group'>";
-            echo "<button class='btn btn-danger borrar'><i class='fa fa-times borrar'></i></button>";
+            echo "<button class='btn btn-danger ' onClick='borrar(".$row['id'].")'><i class='fa fa-times borrar'></i></button>";
             echo "</div>";
             echo "</td>";
             echo "</tr>";

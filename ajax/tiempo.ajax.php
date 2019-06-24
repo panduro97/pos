@@ -13,7 +13,7 @@ $consulta3 = "SELECT * from stock WHERE codigos = '1201'";
     echo "Si entro";
     $datos = $conn->query($consulta3);
     $row = mysqli_fetch_array($datos);
-   $row2 = $row['stock'];
+    $row2 = $row['stock'];
 
 
 $consulta3 = "SELECT * from stock WHERE codigos = '901'";
