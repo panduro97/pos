@@ -17,8 +17,8 @@ if($descripcion != null){
         echo "Error: " . $consulta . "<br>" . $conn->error;
     }
 }else{
-$id = $_POST['id'];
-
+    $id = $_POST['id'];
+    
 }
 
 

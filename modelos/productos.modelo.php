@@ -80,6 +80,8 @@ class ModeloProductos{
 	=============================================*/
 	static public function mdlEditarProducto($tabla, $datos){
 		$tabla2 = "stock";
+		$tabla3 = "stock";
+
 		$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET id_categoria = :id_categoria, descripcion = :descripcion, imagen = :imagen, precio_compra = :precio_compra, precio_venta = :precio_venta WHERE codigo = :codigo");
 
 		$stmt->bindParam(":id_categoria", $datos["id_categoria"], PDO::PARAM_INT);
@@ -96,7 +98,13 @@ class ModeloProductos{
 		$stmt2->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
 		$stmt2->bindParam(":stock", $datos["stock"], PDO::PARAM_STR); 
 
-		if($stmt->execute() && $stmt2->execute()){
+		
+		$stmt3 = Conexion::conectar()->prepare("UPDATE inventarios inner join $tabla  on inventarios.indicador = productos.conexion SET stock = :stock WHERE productos.codigo = :codigo");
+		$stmt3->bindParam(":codigo", $datos["codigo"], PDO::PARAM_STR);
+		$stmt3->bindParam(":stock", $datos["stock"], PDO::PARAM_STR); 
+
+
+		if($stmt->execute() && $stmt2->execute() && $stmt3->execute()){
 
 			return "ok";
 
@@ -151,7 +159,6 @@ class ModeloProductos{
 			
 			if($item1 == "ventas"){
 				$stmt = Conexion::conectar()->prepare("UPDATE $tabla SET $item1 = :$item1 WHERE id = :id");
-   
 				$stmt -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
 				$stmt -> bindParam(":id", $valor, PDO::PARAM_STR);
 		
@@ -173,6 +180,8 @@ class ModeloProductos{
 				$stmt2 -> bindParam(":".$item1, $valor1, PDO::PARAM_STR);
 				$stmt2 -> bindParam(":id", $valor, PDO::PARAM_STR);
 		
+
+		
 				if($stmt2 -> execute()){
 		
 					return "ok";
@@ -180,12 +189,15 @@ class ModeloProductos{
 				}else{
 		
 					return "error";	
-		
+
 				}
+
 		
 				$stmt2 -> close();
+
 		
-				$stmt2 = null;	
+				$stmt2 = null;
+
 			}
 
 	   /* } */

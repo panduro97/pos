@@ -221,7 +221,7 @@ class ControladorVentas{
 
 				$imprimir->close(); 
 
-				echo'<script>
+				/* echo'<script>
 
 				localStorage.removeItem("rango");
 
@@ -238,7 +238,7 @@ class ControladorVentas{
 								}
 							})
 
-				</script>';
+				</script>'; */
 
 			}
 

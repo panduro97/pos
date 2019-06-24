@@ -137,6 +137,13 @@
 
 						</a>
 
+						<a href="inventarios">
+							
+							<i class="fa fa-circle-o"></i>
+							<span>Inventarios</span>
+
+						</a>
+
 					</li>';
 
 					}
