@@ -21,11 +21,11 @@ Inventarios
 
     <div class="box">
 
-      <div class="box-header with-border">
+      <div class="box-header with-border borrar">
   
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarProducto">
+        <button class="btn btn-primary send" data-toggle="modal">
           
-          Agregar gasto
+          Corte de Caja
 
         </button>
 
@@ -39,11 +39,15 @@ Inventarios
          
          <tr>
            
-           <th style="width:10px">#</th>
-           <th>Código</th>
+           
+           <th>id</th>
            <th>Descripción</th>
-           <th>Inversión</th>
-           <th>Fecha</th>
+           <th>Precio</th>
+           <th>Inventario Inicial</th>
+           <th>Inventario Final</th>
+           <th>Ventas Dia</th>
+           <th>Ingresos Producto</th>
+
 
          </tr> 
 
@@ -52,28 +56,27 @@ Inventarios
         <tbody>
    
        <?php
+
+
           $conn = mysqli_connect('bigdeli.mx', 'atomstud_sergio', 'bigdeli123', 'atomstud_pos');
           if (!$conn) {
               die("Connection failed: " . mysqli_connect_error());
           }
-          $consulta = "SELECT * FROM gastos";
+          $consulta = "SELECT * FROM productos INNER JOIN stock WHERE productos.conexion = stock.relacion ";
           $datos = $conn->query($consulta);
-          $var=0;
           while ($row=mysqli_fetch_array($datos)){
+            $ventas = $row['ventas'];
+            $precio = $row['precio_venta'];
+            $resultado = $ventas * $precio;
             echo " <tr>";
             echo "<td>".$row['id']."</td>"; 
-            echo "<input type='hidden' class='id' cont='".$var."' value=".$row['id'].">";
-            echo "<td>000".$row['id']."</td>";
-            echo "<td>".$row['descripcion']."</td>";
-            echo "<td>".$row['dinero']."</td>";
-            echo "<td>".$row['fecha']."</td>";
-            echo "<td>";
-            echo "<div class='btn-group'>";
-            echo "<button class='btn btn-danger borrar'><i class='fa fa-times borrar'></i></button>";
-            echo "</div>";
-            echo "</td>";
+            echo "<td style='width:15vw;'>".$row['descripcion']."</td>";
+            echo "<td>".$row['precio_venta']."</td>";
+            echo "<td>".$row['stockInicio']."</td>";
+            echo "<td>".$row['stock']."</td>";
+            echo "<td>".$row['ventas']."</td>";
+            echo "<td>" .$resultado. "</td>";
             echo "</tr>";
-            $var++;
           }
             ?>
            

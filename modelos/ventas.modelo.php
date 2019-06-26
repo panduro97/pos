@@ -54,6 +54,7 @@ class ModeloVentas{
 		$stmt->bindParam(":total", $datos["total"], PDO::PARAM_STR);
 		$stmt->bindParam(":metodo_pago", $datos["metodo_pago"], PDO::PARAM_STR);
 		$stmt->bindParam(":fechaz", $fechaz, PDO::PARAM_STR);
+			
 
 
 		if($stmt->execute()){

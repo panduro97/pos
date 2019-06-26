@@ -15,14 +15,6 @@ $dinero = $_POST['dinero'];
     } else {
         echo "Error: " . $consulta . "<br>" . $conn->error;
     }
-<<<<<<< HEAD
-}else{
-    $id = $_POST['id'];
-    
-}
-=======
-
->>>>>>> 18716c0f8d78c5cfc96b3d7d31b76a7106bc138a
 
 
 ?>
